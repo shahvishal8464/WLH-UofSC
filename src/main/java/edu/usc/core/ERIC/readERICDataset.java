@@ -23,10 +23,10 @@ public class readERICDataset {
 			for(int i=1995; i<2017;i++){
 				persist.createPath("docs/"+i);
 				persist.createPath("text/"+i);
-				persist.createYearlyExcelSheet();
 			}
 			
 			for( File file : file_list){
+				persist.createYearlyExcelSheet();
 				System.out.println("Reading File : "+file.getName());
 				is = new FileInputStream(file);
 				parser.parse(is);

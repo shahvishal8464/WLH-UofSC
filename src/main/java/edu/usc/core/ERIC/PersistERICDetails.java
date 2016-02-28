@@ -18,9 +18,9 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 public class PersistERICDetails {
 	
 	private static String abstractFilePath = "abstracts/ERIC/";
-	private int column_count=0;
-	private int common_row_count=0;
-	private int yearly_row_count=0;
+	private static int column_count=0;
+	private static int common_row_count=0;
+	private static int yearly_row_count=0;
 	
 	private File file = null; 
 	private static XSSFWorkbook common_workbook= null;
@@ -119,6 +119,7 @@ public class PersistERICDetails {
 	public void createCommonExcelSheet(){
 		common_workbook = new XSSFWorkbook();
 		common_sheet = common_workbook.createSheet("Default");
+		common_row_count=0;
 	}
 
 	public void addRowCommonExcelSheet(ERICObject object){
@@ -159,7 +160,7 @@ public class PersistERICDetails {
 	public void createYearlyExcelSheet(){
 		yearly_workbook = new XSSFWorkbook();
 		yearly_sheet = yearly_workbook.createSheet("Default");
-		yearly_row_count=0;
+		yearly_row_count=0;           		
 	}
 
 	public void addRowYearlyExcelSheet(ERICObject object){
@@ -189,7 +190,7 @@ public class PersistERICDetails {
 	public void persistYearlyExcelSheet(String year){
 		try {
 			FileOutputStream outputStream = new FileOutputStream(abstractFilePath+"/Publications_"+year+".xlsx"); 
-            common_workbook.write(outputStream);
+            yearly_workbook.write(outputStream);
             System.out.println("Written "+yearly_row_count+" RecordsTo File : Publications_"+year+".xlsx");
 		}catch (Exception e) {
 			System.out.println("Could Not Write To File : Publications_"+year+".xlsx");

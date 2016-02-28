@@ -80,56 +80,28 @@
 				</plugin>
 				
 				<plugin>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.4.1</version>
-					<configuration>
-						<!-- get all project dependencies -->
-						<descriptorRefs>
-							<descriptorRef>jar-with-dependencies</descriptorRef>
-						</descriptorRefs>
-						<!-- MainClass in manifest make a executable jar -->
-						<archive>
-						  <manifest>
-						  </manifest>
-						</archive>
-					</configuration>
+					<groupId>org.dstovall</groupId>
+					<artifactId>onejar-maven-plugin</artifactId>
+					<version>1.4.4</version>
 					<executions>
-					  <execution>
-						<id>make-assembly</id>
-                                        <!-- bind to the packaging phase -->
-						<phase>package</phase> 
-						<goals>
-							<goal>single</goal>
-						</goals>
-					  </execution>
+						  <execution>
+							<goals>
+								<goal>one-jar</goal>
+							</goals>
+						  </execution>
 					</executions>
 				</plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-shade-plugin</artifactId>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>shade</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<finalName>WLH-${artifactId}-${version}</finalName>
-						<descriptorRefs>
-							<descriptorRef>jar-with-dependencies</descriptorRef>
-						</descriptorRefs>
-						<!-- MainClass in manifest make a executable jar -->
-						<archive>
-						  <manifest>
-						  </manifest>
-						</archive>
-					</configuration>
-				</plugin>
-								
 			</plugins>
 		</pluginManagement>
-	</build>
+	  </build>
+
+  <!-- One-Jar is in the googlecode repository -->
+	  <pluginRepositories>
+			<pluginRepository>
+				<id>onejar-maven-plugin.googlecode.com</id>
+				<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+			</pluginRepository>
+	  </pluginRepositories>
+	
 </project>

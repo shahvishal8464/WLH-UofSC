@@ -147,8 +147,9 @@ public class PersistERICDetails {
 	
 	public void persistCommonExcelSheet(){
 		try {
-			FileOutputStream outputStream = new FileOutputStream(abstractFilePath+"/"+"ERIC_Publications.xlsx"); 
+			FileOutputStream outputStream = new FileOutputStream(abstractFilePath+"/ERIC_Publications.xlsx"); 
             common_workbook.write(outputStream);
+            System.out.println("Written "+ common_row_count+" Records To File : ERIC_Publications.xlsx");
 		}catch (Exception e) {
 			System.out.println("Could Not Write To File : ERIC_Publications.xlsx");
 			e.printStackTrace();
@@ -189,6 +190,7 @@ public class PersistERICDetails {
 		try {
 			FileOutputStream outputStream = new FileOutputStream(abstractFilePath+"/Publications_"+year+".xlsx"); 
             common_workbook.write(outputStream);
+            System.out.println("Written "+yearly_row_count+" RecordsTo File : Publications_"+year+".xlsx");
 		}catch (Exception e) {
 			System.out.println("Could Not Write To File : Publications_"+year+".xlsx");
 			e.printStackTrace();

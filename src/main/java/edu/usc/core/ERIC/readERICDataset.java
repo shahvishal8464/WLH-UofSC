@@ -15,11 +15,9 @@ public class readERICDataset {
 		PersistERICDetails persist = new PersistERICDetails();
 		ERICDataParser parser = new ERICDataParser();
 		
-//      SAXParserFactory factory = SAXParserFactory.newInstance();
+
         InputStream is =null;
         try {
-//			SAXParser saxParser = factory.newSAXParser();
-//			ERICDataHandler erichandler = new ERICDataHandler();
 			persist.createCommonExcelSheet();
 			
 			for(int i=1995; i<2017;i++){
@@ -31,9 +29,7 @@ public class readERICDataset {
 			for( File file : file_list){
 				System.out.println("Reading File : "+file.getName());
 				is = new FileInputStream(file);
-				//getString(is);
 				parser.parse(is);
-//				saxParser.parse(file, erichandler);
 				System.out.println("Parsing of File Completed : "+file.getName());
 				persist.persistYearlyExcelSheet(file.getName().replaceAll("\\D+",""));
 			}
@@ -47,7 +43,6 @@ public class readERICDataset {
 		BufferedReader br = null;
 		String line;
 		try {
-
 			br = new BufferedReader(new InputStreamReader(is));
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);

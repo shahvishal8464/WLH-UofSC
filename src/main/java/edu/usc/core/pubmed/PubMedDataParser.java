@@ -145,6 +145,7 @@ public class PubMedDataParser {
                     }
                     else if(startElement.getName().getLocalPart().equals("Grant") ){
             			grant = new PubMedGrant();
+            			has_grant =true;
                     	xmlEvent = xmlEventReader.nextEvent();
                     }
                     else if(startElement.getName().getLocalPart().equals("GrantID") && has_grant ){

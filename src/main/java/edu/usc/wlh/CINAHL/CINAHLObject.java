@@ -1,4 +1,4 @@
-package edu.usc.core.CINAHL;
+package edu.usc.wlh.CINAHL;
 
 import java.util.ArrayList;
 import java.util.List;

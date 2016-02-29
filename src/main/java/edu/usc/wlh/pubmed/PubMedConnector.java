@@ -1,4 +1,4 @@
-package edu.usc.core.pubmed;
+package edu.usc.wlh.pubmed;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

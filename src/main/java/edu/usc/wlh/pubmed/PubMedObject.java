@@ -1,11 +1,8 @@
-package edu.usc.core.pubmed;
+package edu.usc.wlh.pubmed;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 public class PubMedObject {
 
@@ -36,7 +33,6 @@ public class PubMedObject {
 	
 	public PubMedObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package edu.usc.core.CINAHL;
+package edu.usc.wlh.CINAHL;
 
 import java.io.FileInputStream;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package edu.usc.core.ERIC;
+package edu.usc.wlh.ERIC;
 
 public class KeywordSearch {
 

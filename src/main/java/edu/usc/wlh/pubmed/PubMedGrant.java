@@ -1,4 +1,4 @@
-package edu.usc.core.pubmed;
+package edu.usc.wlh.pubmed;
 
 public class PubMedGrant {
 

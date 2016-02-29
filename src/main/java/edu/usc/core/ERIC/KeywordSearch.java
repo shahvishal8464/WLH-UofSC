@@ -24,7 +24,7 @@ public class KeywordSearch {
 			}
 		}
 		
-		if(object.getKeywords().size()>2){
+		if(object.getKeywords().size()>=2){
 			persist.persistToWordDocument(object);
 			persist.persistToTextFile(object);
 			persist.addRowCommonExcelSheet(object);

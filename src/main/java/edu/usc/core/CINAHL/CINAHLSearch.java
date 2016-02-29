@@ -8,7 +8,9 @@ public class CINAHLSearch {
 		CINAHLConnectionConstants.readCredentials() ;
 		CINAHLConnector connector =new CINAHLConnector();
 		CINAHLStaxParser parser = new CINAHLStaxParser();
-
+		PersistCINAHLData persist = new PersistCINAHLData();
+		persist.createCommonExcelSheet();
+		
 		InputStream is = null;
 		int i=1;
 			
@@ -17,5 +19,7 @@ public class CINAHLSearch {
 				parser.parse(is);
 				i+=200;
 		}
+		
+		persist.persistCommonExcelSheet();
 	}	
 }

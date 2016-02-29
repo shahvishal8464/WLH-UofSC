@@ -36,8 +36,10 @@ public class ERICDataParser {
                     	attribute = startElement.getAttributeByName(new QName("scheme")).toString();
             			if(attribute==null)
             				attribute = "";
-            			else if(attribute.equalsIgnoreCase("personal author")){
-            				object.addAuthors(xmlEvent.asCharacters().getData());
+            			else {
+            				attribute = attribute.substring(attribute.indexOf('\'')).replaceAll("'", "");
+            				if(attribute.equalsIgnoreCase("personal author"))
+            					object.addAuthors(xmlEvent.asCharacters().getData());
             			}
                     }
                     
@@ -67,27 +69,29 @@ public class ERICDataParser {
                     		object.setAbstract(xmlEvent.asCharacters().getData());
                     }
                     
-                    else if(startElement.getName().getLocalPart().equals("publisher")){
+                    else if(startElement.getName().getLocalPart().equals("source")){
                     	xmlEvent = xmlEventReader.nextEvent();
-                		if(!xmlEvent.isEndElement())
+                		if(!xmlEvent.isEndElement()){
                 			object.setJournal(xmlEvent.asCharacters().getData());
+                		}	
                     }
                     
                     else if(startElement.getName().getLocalPart().equals("citation")){
                     	xmlEvent = xmlEventReader.nextEvent();
                     	if(object.getJournal()==null || object.getJournal().isEmpty()){
-                    		if(!xmlEvent.isEndElement())
+                    		if(!xmlEvent.isEndElement()){
                     			object.setJournal(xmlEvent.asCharacters().getData());
-                    			
+                    		}	
                     	}	
                     }
                     
-                    else if(startElement.getName().getLocalPart().equals("source")){
+                    else if(startElement.getName().getLocalPart().equals("publisher")){
                     	xmlEvent = xmlEventReader.nextEvent();
                     	if(!xmlEvent.isEndElement()){
-                    		if(object.getJournal()==null || object.getJournal().isEmpty())
+                    		if(object.getJournal()==null || object.getJournal().isEmpty()){
                     			object.setJournal(xmlEvent.asCharacters().getData());
-                    	}
+                    		}
+                    	}	
                     }
                     
                     else if(startElement.getName().getLocalPart().equals("issue")){
@@ -99,7 +103,7 @@ public class ERICDataParser {
                 else if(xmlEvent.isEndElement()){
                 	EndElement end_element=xmlEvent.asEndElement();
                 	if(end_element.getName().getLocalPart().equals("record")){
-                    	search.searchKeywords(object);
+                		search.searchKeywords(object);
             			object.reInitialize();
                     }
                 }

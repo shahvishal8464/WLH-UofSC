@@ -16,5 +16,5 @@
         javac -version
         
   Now Install maven by typing following command:
-        sudo apt-get install maven
+    sudo apt-get install maven
         

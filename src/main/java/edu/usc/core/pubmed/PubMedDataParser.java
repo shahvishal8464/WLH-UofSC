@@ -59,6 +59,8 @@ public class PubMedDataParser {
             XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(is);
             PMID = true;
             PubMedDate = true;
+            pmobj.getAuthors().clear();
+            pmobj.getGrants().clear();
             while(xmlEventReader.hasNext()){
                 XMLEvent xmlEvent = xmlEventReader.nextEvent();
                 	
@@ -67,32 +69,54 @@ public class PubMedDataParser {
                  
                     if(startElement.getName().getLocalPart().equals("PubMedPubDate") && PubMedDate){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	has_pubmed_date=true;
+                    	if(!xmlEvent.isEndElement())
+                    		has_pubmed_date=true;
+                    	else 
+                    		has_pubmed_date=false;
                     }
                     else if(startElement.getName().getLocalPart().equals("Year") && has_pubmed_date){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	pmobj.setPublished_year(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		pmobj.setPublished_year(xmlEvent.asCharacters().getData());
+                    	else
+                    		pmobj.setPublished_year("");
                     }
                     else if(startElement.getName().getLocalPart().equals("Month") && has_pubmed_date){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	pmobj.setPublished_month(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		pmobj.setPublished_month(xmlEvent.asCharacters().getData());
+                    	else
+                    		pmobj.setPublished_month("");
                     }
                     else if(startElement.getName().getLocalPart().equals("AbstractText")){
-                    	xmlEvent = xmlEventReader.nextEvent();                	
-                    	pmobj.setAbstract_Text(xmlEvent.asCharacters().getData());
+                    	xmlEvent = xmlEventReader.nextEvent();
+                    	if(!xmlEvent.isEndElement())
+                    		pmobj.setAbstract_Text(xmlEvent.asCharacters().getData());
+                    	else
+                    		pmobj.setAbstract_Text("");
                     }
                     else if(startElement.getName().getLocalPart().equals("ArticleTitle")){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	pmobj.setTitle(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		pmobj.setTitle(xmlEvent.asCharacters().getData());
+                    	else
+                    		pmobj.setTitle("");
                     }
                     else if(startElement.getName().getLocalPart().equals("Title")){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	pmobj.setJournal_Name(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		pmobj.setJournal_Name(xmlEvent.asCharacters().getData());
+                    	else
+                    		pmobj.setJournal_Name("");
                     }
                     else if(startElement.getName().getLocalPart().equals("PMID") && PMID){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	pmobj.setPubMed_Id(xmlEvent.asCharacters().getData());
-                    	PMID= false;
+                    	if(!xmlEvent.isEndElement())
+                    		pmobj.setPubMed_Id(xmlEvent.asCharacters().getData());
+                    	else
+                    		pmobj.setPubMed_Id("");
+
+                    		PMID= false;
                     }
                     else if(startElement.getName().getLocalPart().equals("Author")){
                     	author=new Author();
@@ -100,15 +124,24 @@ public class PubMedDataParser {
                     }
                     else if(startElement.getName().getLocalPart().equals("LastName")){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	author.setLast_name(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		author.setLast_name(xmlEvent.asCharacters().getData());
+                    	else
+                    		author.setLast_name("");
                     }
                     else if(startElement.getName().getLocalPart().equals("ForeName")){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	author.setFore_name(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		author.setFore_name(xmlEvent.asCharacters().getData());
+                    	else
+                    		author.setFore_name("");
                     }
                     else if(startElement.getName().getLocalPart().equals("Affiliation")){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	author.setAffiliation(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		author.setAffiliation(xmlEvent.asCharacters().getData());
+                    	else
+                    		author.setAffiliation("");
                     }
                     else if(startElement.getName().getLocalPart().equals("Grant") ){
             			grant = new PubMedGrant();
@@ -116,15 +149,24 @@ public class PubMedDataParser {
                     }
                     else if(startElement.getName().getLocalPart().equals("GrantID") && has_grant ){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	grant.setGrantID(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		grant.setGrantID(xmlEvent.asCharacters().getData());
+                    	else
+                    		grant.setGrantID("");
                     }
                     else if(startElement.getName().getLocalPart().equals("Agency") && has_grant ){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	grant.setAgency(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		grant.setAgency(xmlEvent.asCharacters().getData());
+                    	else
+                    		grant.setAgency("");
                     }
                     else if(startElement.getName().getLocalPart().equals("Country") && has_grant ){
                     	xmlEvent = xmlEventReader.nextEvent();
-                    	grant.setCountry(xmlEvent.asCharacters().getData());
+                    	if(!xmlEvent.isEndElement())
+                    		grant.setCountry(xmlEvent.asCharacters().getData());
+                    	else
+                    		grant.setCountry("");
                     }
                 }
                 else if (xmlEvent.isEndElement()){
